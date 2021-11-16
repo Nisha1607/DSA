@@ -1,0 +1,62 @@
+ListNode* Solution::getIntersectionNode(ListNode* A, ListNode* B) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    int cnt1=0,cnt2=0;
+    ListNode* tmpA=A;
+    ListNode* headA=A;
+    ListNode* headB=B;
+    ListNode* tmpB=B;
+    while(headA!=NULL)
+    {
+        cnt1++;
+        headA=headA->next;
+    }
+    while(headB!=NULL)
+    {
+        cnt2++;
+        headB=headB->next;
+    }
+    if(cnt1>cnt2)
+    {
+        int h1=cnt1-cnt2;
+        while(h1--)
+        {
+            if(tmpA==NULL)
+                return tmpB;
+            tmpA=tmpA->next;
+        }
+        while(tmpA!=tmpB)
+        {
+            tmpA=tmpA->next;
+            tmpB=tmpB->next;
+        }
+        if(tmpB!=tmpA)
+            return NULL;
+        else
+            return tmpA;
+        
+    }
+    else
+    {
+        int h2=cnt2-cnt1;
+        while(h2--)
+        {
+            if(tmpB==NULL)
+                return tmpA;
+            tmpB=tmpB->next;
+        }
+        while(tmpA!=tmpB)
+        {
+            tmpA=tmpA->next;
+            tmpB=tmpB->next;
+        }
+        if(tmpB!=tmpA)
+            return NULL;
+        else
+            return tmpA;
+    }
+    
+    return NULL;
+}
